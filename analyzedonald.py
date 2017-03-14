@@ -15,7 +15,7 @@ with open('donalddata.json') as json_data:
     js = json.load(json_data)
 
 
-# ###################
+##########################################
 #analyze most used words
 ##########################################
 
@@ -31,7 +31,7 @@ for j in range(len(js)):
         line = line.lower()
         words = line.split()
         for word in words:
-            if len(word)<4 or word in boring_words: #get rid of boring words
+            if len(word)<4 or word in boring_words: #get rid of small and boring words
                 continue
             if word not in counts:
                 counts[word] = 1
@@ -55,7 +55,7 @@ print('number of tweets analyzed =', tweetcount)
 print('between the dates:', js[0][0]['created_at'], js[len(js)-1][len(js[len(js)-1])-1]['created_at'])
 
 # ##########################################
-#plot counts using d3
+#plot counts using d3, to view the visualization open the twitterword.htm file in a web browser
 # ##########################################
 x = sorted(counts, key=counts.get, reverse=True)
 highest = None
@@ -87,7 +87,7 @@ print "Output written to donaldwords.js"
 
 
 # ##########################################
-# #plot time plots
+# keep track of what date, time, and day of week he tweeted at
 # ##########################################
 #
 months=[]
@@ -111,6 +111,10 @@ for j in range(len(js)):
         else:
             count_days[day]+=1
 
+# ##########################################
+# make a plot of the day versus number of tweets
+# ##########################################
+#
 days=[]
 days_count=[]
 for day in count_days:
@@ -127,6 +131,10 @@ plt.plot(days,days_count,'o')
 plt.ylabel('number of tweets')
 plt.xlabel('day of year (0 corresponds to Jan 1 of this year')
 
+# ##########################################
+# make a plot of the day of the week versus number of tweets
+# ##########################################
+#
 weekday_list=['Mon', 'Tue', 'Wed', "Thu", 'Fri', 'Sat', 'Sun']
 weekday_count=[]
 for day in weekday_list:
@@ -141,6 +149,7 @@ plt.xlabel('day')
 
 plt.show()
 
+#things to improve:
 #better graph
 #find max
 #calculate hour
