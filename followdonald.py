@@ -13,7 +13,7 @@ connection = urllib.urlopen(url)
 data = connection.read()
 js = json.loads(data)
 wrap_list.append(js)
-print(0, js[0]['text'], js[0]['id']) #print most recent tweet
+print(0, js[0]['text'], js[0]['id'], js[0]['created_at']) #print most recent tweet
 
 
 
@@ -28,7 +28,7 @@ while old_max_id!=max_id:
      connection = urllib.urlopen(url)
      data = connection.read()
      js = json.loads(data)
-     print(count, js[0]['text'], js[0]['id']) #print one every 200 tweets
+     print(count, js[0]['text'], js[0]['id'], js[0]['created_at']) #print one every 200 tweets
      max_id=js[len(js) - 1]['id']
      wrap_list.append(js)
      count=count+1
